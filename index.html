@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulpería La Misión</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 20px;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        #total {
+            font-size: 24px;
+            margin-top: 20px;
+            text-align: center;
+            color: #000;
+            font-weight: bold;
+        }
+        .product-list {
+            margin-top: 20px;
+        }
+        .product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .product span {
+            text-align: right;
+            flex: 1;
+        }
+        .product button {
+            padding: 8px 12px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .product button.plus {
+            background-color: #28a745;
+            /* Green */
+        }
+        .product button.plus:hover {
+            background-color: #218838;
+        }
+        .product button.minus {
+            background-color: #dc3545;
+            /* Red */
+        }
+        .product button.minus:hover {
+            background-color: #c82333;
+        }
+        #selected-products {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f3f5;
+            border-radius: 5px;
+            width: 300px;
+            border: 1px solid #ced4da;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #selected-products h3 {
+            margin-top: 0;
+        }
+        #selected-products ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #selected-products li {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+        #selected-products li span {
+            text-align: right;
+            flex: 1;
+        }
+        #selected-products #selected-total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #save-image-btn {
+            background-color: #17a2b8;
+        }
+        #save-image-btn:hover {
+            background-color: #138496;
+        }
+        #vuelto-btn {
+            background-color: #ffa500;
+            font-size: 14px;
+        }
+        #vuelto-btn:hover {
+            background-color: #ff8c00;
+        }
+        #vuelto-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #vuelto-container input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: calc(100% - 20px);
+        }
+        #vuelto-container p {
+            font-size: 18px;
+            margin: 0;
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pulpería La Misión</h1>
+        <div id="total">
+            Total: 0 Lps
+        </div>
+        <button onclick="toggleSelectedProducts()">Productos Seleccionados</button>
+        <button id="vuelto-btn" onclick="toggleVuelto()">Vuelto de</button>
+    </header>
+
+    <div class="product-list">
+        <div class="product">
+            <span>Coca-Cola medio</span>
+            <span>20 Lps</span>
+            <div>
+                <button class="plus" onclick="increaseProduct('Coca-Cola medio', 20)">+</button>
+                <button class="minus" onclick="decreaseProduct('Coca-Cola medio', 20)">-</button>
+            </div>
+        </div>
+        <div class="product">
+            <span>Fresca 1.5</span>
+            <span>35 Lps</span>
+            <div>
+                <button class="plus" onclick="increaseProduct('Fresca 1.5', 35)">+</button>
+                <button class="minus" onclick="decreaseProduct('Fresca 1.5', 35)">-</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="selected-products">
+        <h3>Productos Seleccionados:</h3>
+        <ul id="product-list"></ul>
+        <div id="selected-total">
+            Total Seleccionado: 0 Lps
+        </div>
+        <button id="save-image-btn" onclick="saveAsImage()">Guardar como Imagen</button>
+    </div>
+
+    <div id="vuelto-container">
+        <input type="number" id="vuelto-amount" placeholder="Ingresa la cantidad de dinero que das">
+        <p id="vuelto-result"></p>
+    </div>
+
+    <script>
+        let total = 0;
+        let selectedProducts = [];
+
+        function increaseProduct(name, price) {
+            const productIndex = selectedProducts.findIndex(product => product.name === name);
+            if (productIndex > -1) {
+                selectedProducts[productIndex].quantity += 1;
+            } else {
+                selectedProducts.push({
+                    name, price, quantity: 1
+                });
+            }
+            total += price;
+            updateUI();
+        }
+
+        function decreaseProduct(name, price) {
+            const productIndex = selectedProducts.findIndex(product => product.name === name);
+            if (productIndex > -1 && selectedProducts[productIndex].quantity > 0) {
+                selectedProducts[productIndex].quantity -= 1;
+                total -= price;
+
+                if (selectedProducts[productIndex].quantity === 0) {
+                    selectedProducts.splice(productIndex, 1);
+                }
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('total').innerText = 'Total: ' + total + ' Lps';
+            const productList = document.getElementById('product-list');
+            const selectedTotal = selectedProducts.reduce((acc, product) => acc + (product.price * product.quantity), 0);
+            document.getElementById('selected-total').innerText = 'Total Seleccionado: ' + selectedTotal + ' Lps';
+            productList.innerHTML = '';
+
+            selectedProducts.forEach(product => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = product.name + ' x ' + product.quantity + '<span>' + (product.price * product.quantity) + ' Lps</span>';
+                productList.appendChild(listItem);
+            });
+        }
+
+        function toggleSelectedProducts() {
+            const selectedProductsDiv = document.getElementById('selected-products');
+            selectedProductsDiv.style.display = selectedProductsDiv.style.display === 'none' ? 'block': 'none';
+        }
+
+        function toggleVuelto() {
+            const vueltoContainer = document.getElementById('vuelto-container');
+            vueltoContainer.style.display = vueltoContainer.style.display === 'none' ? 'block': 'none';
+        }
+
+        document.getElementById('vuelto-amount').addEventListener('input', function() {
+            const amountGiven = parseFloat(this.value);
+            const selectedTotal = selectedProducts.reduce((acc, product) => acc + (product.price * product.quantity), 0);
+            const vuelto = amountGiven - selectedTotal;
+            document.getElementById('vuelto-result').innerText = vuelto >= 0 ? 'Vuelto: ' + vuelto + ' Lps': 'Cantidad insuficiente';
+        });
+
+        function saveAsImage() {
+            const element = document.getElementById('selected-products');
+            html2canvas(element).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'productos_seleccionados.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4
