@@ -335,6 +335,9 @@
         }
  
         function saveAsImage() {
+                console.log('saveAsImage llamada');
+                // ... código de la función ...
+
             const selectedProductsDiv = document.getElementById('selectedProducts');
             
             html2canvas(selectedProductsDiv).then(canvas => {
@@ -342,8 +345,19 @@
                 link.download = 'productos-seleccionados.png';
                 link.href = canvas.toDataURL('image/png');
                 link.click();
+            }).catch(error => {
+                console.error('Error al guardar la imagen:', error);
+                alert('Error al guardar la imagen. Por favor, inténtelo de nuevo.');
             });
         }
+        
+document.addEventListener('DOMContentLoaded', function() {
+            const saveButton = document.querySelector('.save-button');
+            saveButton.addEventListener('click', function() {
+                console.log('Botón clicado');
+                saveAsImage();
+            });
+        });
     </script>
 </body>
 </html>
