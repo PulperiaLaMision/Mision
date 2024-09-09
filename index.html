@@ -314,22 +314,7 @@
             
             <!-- Botón para guardar como imagen -->
             <button class="save-button" onclick="saveAsImage()">Guardar como Imagen</button>
-             <!-- Botón para compartir por WhatsApp -->
-           <button class="save-button" onclick="shareOnWhatsApp()">Compartir en WhatsApp</button>
 
-<script>
-    function shareOnWhatsApp() {
-        const selectedProductsDiv = document.getElementById('selectedProducts');
-        html2canvas(selectedProductsDiv).then(canvas => {
-            const image = canvas.toDataURL('image/png');
-            const url = `https://api.whatsapp.com/send?text=')&attachment=`;
-            window.open(url, '_blank');
-        }).catch(error => {
-            console.error('Error al compartir en WhatsApp:', error);
-            alert('Error al compartir en WhatsApp. Por favor, inténtelo de nuevo.');
-        });
-    }
-</script>
 
             <button class="button red-button button-close" onclick="toggleSelectedProducts()">Cerrar</button>
         </div>
