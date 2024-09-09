@@ -6,272 +6,290 @@
     <title>Pulpería La Misión</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f6f9;
-            margin: 20px;
-            color: #333;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding-top: 130px; /* Espacio para el cuadro fijo */
         }
-        header {
+
+        .fixed-top {
+            position: fixed;
+            top: 0;
+            width:  90%;
             background-color: #007bff;
+            color: white;
             padding: 20px;
             text-align: center;
-            color: white;
-            position: sticky;
-            top: 0;
             z-index: 1000;
+            border-bottom: 2px solid #0056b3; /* Borde en la parte inferior */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mejor visibilidad */
         }
-        header h1 {
+
+        .fixed-top h1 {
+            font-size: 30px; /* Título más grande */
             margin: 0;
-            font-size: 36px;
         }
-        #total {
-            font-size: 24px;
-            margin-top: 20px;
-            text-align: center;
-            color: #000;
-            font-weight: bold;
+
+        .fixed-top p {
+            font-size: 20px;
+            margin: 10px 0;
+            
         }
-        .product-list {
-            margin-top: 20px;
+
+        .fixed-top button {
+            padding: 7px 16px;
+            margin: 10px 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
-        .product {
+
+        .green-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .orange-button {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .red-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .green-button:hover, .orange-button:hover, .red-button:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            padding: 30px;
+            max-width: 800px;
+            margin: 12px auto 0; /* Ajustado para bajar los productos */
+        }
+
+        .products-list {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-        }
-        .product span {
-            text-align: right;
-            flex: 1;
-        }
-        .product button {
-            padding: 8px 12px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            background-color: #f1f1f1;
+            padding: 7px;
+            margin: 20px 0;
+            border-radius: 10px;
             font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para las tarjetas de productos */
         }
-        .product button.plus {
-            background-color: #28a745;
-            /* Green */
-        }
-        .product button.plus:hover {
-            background-color: #218838;
-        }
-        .product button.minus {
-            background-color: #dc3545;
-            /* Red */
-        }
-        .product button.minus:hover {
-            background-color: #c82333;
-        }
-        #selected-products {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f1f3f5;
-            border-radius: 5px;
-            width: 300px;
-            border: 1px solid #ced4da;
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        #selected-products h3 {
-            margin-top: 0;
-        }
-        #selected-products ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        #selected-products li {
+
+        .products-list .product-info {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            width: 100%;
         }
-        #selected-products li span {
+
+        .products-list p {
+            margin: 0;
+        }
+
+        .products-list .price {
             text-align: right;
             flex: 1;
         }
-        #selected-products #selected-total {
-            font-weight: bold;
-            margin-top: 10px;
+
+        .button-group {
+            display: flex;
+            align-items: center;
         }
-        button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 5px;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        #save-image-btn {
-            background-color: #17a2b8;
-        }
-        #save-image-btn:hover {
-            background-color: #138496;
-        }
-        #vuelto-btn {
-            background-color: #ffa500;
-            font-size: 14px;
-        }
-        #vuelto-btn:hover {
-            background-color: #ff8c00;
-        }
-        #vuelto-container {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #vuelto-container input {
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-            width: calc(100% - 20px);
-        }
-        #vuelto-container p {
+
+        .button-group button {
+            width: 35px;
+            height: 35px;
+            padding: 0;
             font-size: 18px;
-            margin: 0;
-            color: green;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .selected-products, .change-calculator {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para las secciones de productos seleccionados y calculadora */
             text-align: center;
+        }
+
+        .selected-products table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .selected-products table th, .selected-products table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: calc(100% - 22px); /* Ajustado para el padding */
+            font-size: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .button-close {
+            padding: 10px 25px;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <header>
+    <div class="fixed-top">
         <h1>Pulpería La Misión</h1>
-        <div id="total">
-            Total: 0 Lps
-        </div>
-        <button onclick="toggleSelectedProducts()">Productos Seleccionados</button>
-        <button id="vuelto-btn" onclick="toggleVuelto()">Vuelto de</button>
-    </header>
-
-    <div class="product-list">
-        <div class="product">
-            <span>Coca-Cola medio</span>
-            <span>20 Lps</span>
-            <div>
-                <button class="plus" onclick="increaseProduct('Coca-Cola medio', 20)">+</button>
-                <button class="minus" onclick="decreaseProduct('Coca-Cola medio', 20)">-</button>
-            </div>
-        </div>
-        <div class="product">
-            <span>Fresca 1.5</span>
-            <span>35 Lps</span>
-            <div>
-                <button class="plus" onclick="increaseProduct('Fresca 1.5', 35)">+</button>
-                <button class="minus" onclick="decreaseProduct('Fresca 1.5', 35)">-</button>
-            </div>
-          </div>
-              <div class="product">
-            <span>Jugo Valle Lata</span>
-            <span>15 Lps</span>
-            <div>
-                <button class="plus" onclick="increaseProduct('Jugo Valle Lata', 15)">+</button>
-                <button class="minus" onclick="decreaseProduct('Jugo Valle Lata', 15)">-</button>
-            </div>
-        </div>
+        <p>Total: <span id="total">0.00</span> Lps</p>
+        <button class="button green-button" onclick="toggleSelectedProducts()">Productos Seleccionados</button>
+        <button class="button orange-button" onclick="toggleChangeCalculator()">Vuelto</button>
     </div>
 
-    <div id="selected-products">
-        <h3>Productos Seleccionados:</h3>
-        <ul id="product-list"></ul>
-        <div id="selected-total">
-            Total Seleccionado: 0 Lps
+    <div class="container">
+        <div class="products-list">
+            <div class="product-info">
+                <p>Coca-Cola medio</p>
+                <p class="price">20 Lps</p>
+            </div>
+            <div class="button-group">
+                <button class="button green-button" onclick="addProduct('Coca-Cola medio', 20)">+</button>
+                <button class="button red-button" onclick="removeProduct('Coca-Cola medio', 20)">-</button>
+            </div>
         </div>
-       
-    
 
-    <div id="vuelto-container">
-        <input type="number" id="vuelto-amount" placeholder="Ingresa la cantidad de dinero que das">
-        <p id="vuelto-result"></p>
+        <div class="products-list">
+            <div class="product-info">
+                <p>Fresca 1.5</p>
+                <p class="price">35 Lps</p>
+            </div>
+            <div class="button-group">
+                <button class="button green-button" onclick="addProduct('Fresca 1.5', 35)">+</button>
+                <button class="button red-button" onclick="removeProduct('Fresca 1.5', 35)">-</button>
+            </div>
+        </div>
+
+        <div class="selected-products" id="selectedProducts">
+            <h2>Productos Seleccionados</h2>
+            <table id="productTable">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            </table>
+            <p>Total Seleccionado: <span id="selectedTotal">0</span> Lps</p>
+            <button class="button red-button button-close" onclick="toggleSelectedProducts()">Cerrar</button>
+        </div>
+
+        <div class="change-calculator" id="changeCalculator">
+            <h2>Calculadora de Vuelto</h2>
+            <input type="number" id="amountGiven" placeholder="Ingresa la cantidad de dinero" oninput="updateChange()">
+            <p>Vuelto: <span id="change">0</span> Lps</p>
+            <button class="button red-button button-close" onclick="toggleChangeCalculator()">Cerrar</button>
+        </div>
     </div>
 
     <script>
         let total = 0;
-        let selectedProducts = [];
+        let selectedProducts = {};
 
-        function increaseProduct(name, price) {
-            const productIndex = selectedProducts.findIndex(product => product.name === name);
-            if (productIndex > -1) {
-                selectedProducts[productIndex].quantity += 1;
-            } else {
-                selectedProducts.push({
-                    name, price, quantity: 1
-                });
-            }
+        function addProduct(name, price) {
             total += price;
-            updateUI();
-        }
+            document.getElementById('total').innerText = total;
 
-        function decreaseProduct(name, price) {
-            const productIndex = selectedProducts.findIndex(product => product.name === name);
-            if (productIndex > -1 && selectedProducts[productIndex].quantity > 0) {
-                selectedProducts[productIndex].quantity -= 1;
-                total -= price;
-
-                if (selectedProducts[productIndex].quantity === 0) {
-                    selectedProducts.splice(productIndex, 1);
-                }
+            if (selectedProducts[name]) {
+                selectedProducts[name].quantity += 1;
+            } else {
+                selectedProducts[name] = { price: price, quantity: 1 };
             }
-            updateUI();
+            updateSelectedProductsTable();
         }
 
-        function updateUI() {
-            document.getElementById('total').innerText = 'Total: ' + total + ' Lps';
-            const productList = document.getElementById('product-list');
-            const selectedTotal = selectedProducts.reduce((acc, product) => acc + (product.price * product.quantity), 0);
-            document.getElementById('selected-total').innerText = 'Total Seleccionado: ' + selectedTotal + ' Lps';
-            productList.innerHTML = '';
+        function removeProduct(name, price) {
+            if (selectedProducts[name] && selectedProducts[name].quantity > 0) {
+                total -= price;
+                document.getElementById('total').innerText = total;
+                selectedProducts[name].quantity -= 1;
 
-            selectedProducts.forEach(product => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = product.name + ' x ' + product.quantity + '<span>' + (product.price * product.quantity) + ' Lps</span>';
-                productList.appendChild(listItem);
-            });
+                if (selectedProducts[name].quantity === 0) {
+                    delete selectedProducts[name];
+                }
+                updateSelectedProductsTable();
+            }
         }
 
         function toggleSelectedProducts() {
-            const selectedProductsDiv = document.getElementById('selected-products');
-            selectedProductsDiv.style.display = selectedProductsDiv.style.display === 'none' ? 'block': 'none';
+            const selectedProductsDiv = document.getElementById('selectedProducts');
+            const isVisible = selectedProductsDiv.style.display === 'block';
+            if (isVisible) {
+                selectedProductsDiv.style.display = 'none';
+            } else {
+                updateSelectedProductsTable();
+                selectedProductsDiv.style.display = 'block';
+            }
         }
 
-        function toggleVuelto() {
-            const vueltoContainer = document.getElementById('vuelto-container');
-            vueltoContainer.style.display = vueltoContainer.style.display === 'none' ? 'block': 'none';
+        function toggleChangeCalculator() {
+            const changeCalculatorDiv = document.getElementById('changeCalculator');
+            const isVisible = changeCalculatorDiv.style.display === 'block';
+            if (isVisible) {
+                changeCalculatorDiv.style.display = 'none';
+            } else {
+                changeCalculatorDiv.style.display = 'block';
+            }
         }
 
-        document.getElementById('vuelto-amount').addEventListener('input', function() {
-            const amountGiven = parseFloat(this.value);
-            const selectedTotal = selectedProducts.reduce((acc, product) => acc + (product.price * product.quantity), 0);
-            const vuelto = amountGiven - selectedTotal;
-            document.getElementById('vuelto-result').innerText = vuelto >= 0 ? 'Vuelto: ' + vuelto + ' Lps': 'Cantidad insuficiente';
-        });
+        function updateSelectedProductsTable() {
+            const table = document.getElementById('productTable');
+            table.innerHTML = `
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            `;
 
-        function saveAsImage() {
-            const element = document.getElementById('selected-products');
-            html2canvas(element).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'productos_seleccionados.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            });
+            let selectedTotal = 0;
+
+            for (let product in selectedProducts) {
+                const row = table.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+
+                cell1.innerHTML = product;
+                cell2.innerHTML = selectedProducts[product].quantity;
+                cell3.innerHTML = selectedProducts[product].price * selectedProducts[product].quantity;
+
+                selectedTotal += selectedProducts[product].price * selectedProducts[product].quantity;
+            }
+
+            document.getElementById('selectedTotal').innerText = selectedTotal;
+        }
+
+        function updateChange() {
+            const amountGiven = parseFloat(document.getElementById('amountGiven').value) || 0;
+            const change = amountGiven - total;
+            document.getElementById('change').innerText = change >= 0 ? change : 0;
         }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4
+</body>
+</html>
