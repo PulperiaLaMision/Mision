@@ -170,6 +170,18 @@
             padding: 10px 25px;
             font-size: 18px;
         }
+        
+
+                /* Prevenir el zoom en el navegador al hacer clic */
+                body, html {
+                    touch-action: manipulation;
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+            </style>
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
