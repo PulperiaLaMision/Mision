@@ -170,7 +170,7 @@
             padding: 10px 25px;
             font-size: 18px;
         }
-    <!-- Incluimos html2canvas desde CDN -->
+<!-- Debe estar en el <head> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     
         <style>
@@ -333,6 +333,7 @@
             const change = amountGiven - total;
             document.getElementById('change').innerText = change >= 0 ? change : 0;
         }
+ 
         function saveAsImage() {
             const selectedProductsDiv = document.getElementById('selectedProducts');
             
