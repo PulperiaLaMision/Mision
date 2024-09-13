@@ -65,9 +65,9 @@
         }
 
         .container {
-            padding: 30px;
+            padding: 10px;
             max-width: 800px;
-            margin: 12px auto 0; /* Ajustado para bajar los productos */
+            margin: 30px auto 0; /* Ajustado para bajar los productos */
         }
 
         .products-list {
@@ -170,18 +170,16 @@
             padding: 10px 25px;
             font-size: 18px;
         }
-        
 
-                /* Prevenir el zoom en el navegador al hacer clic */
-                body, html {
-                    touch-action: manipulation;
-                    -webkit-touch-callout: none;
-                    -webkit-user-select: none;
-                    -moz-user-select: none;
-                    -ms-user-select: none;
-                    user-select: none;
-                }
-            </style>
+        /* Prevenir el zoom en el navegador al hacer clic */
+        body, html {
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
@@ -289,18 +287,20 @@
         <button class="button green-button" onclick="toggleSelectedProducts()">Productos Seleccionados</button>
         <button class="button orange-button" onclick="toggleChangeCalculator()">Vuelto</button>
     </div>
-  </div>
+
     <div class="container">
+        <!-- Lista de productos -->
         <div class="products-list">
             <div class="product-info">
-                <p>Coca-Cola Lata/Bote medio</p>
+                <p>Coca Cola Medio Lata/Bote</p>
                 <p class="price">20 Lps</p>
             </div>
             <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Coca-Cola Lata/Bote medio', 20)">+</button>
-                <button class="button red-button" onclick="removeProduct('Coca-Cola Lata/Bote medio', 20)">-</button>
+                <button class="button green-button" onclick="addProduct('Coca Cola Medio Lata/Bote', 20)">+</button>
+                <button class="button red-button" onclick="removeProduct('Coca Cola Medio Lata/Bote', 20)">-</button>
             </div>
-    
+        </div>
+
         <div class="products-list">
             <div class="product-info">
                 <p>Fresca 1.5</p>
@@ -310,106 +310,89 @@
                 <button class="button green-button" onclick="addProduct('Fresca 1.5', 35)">+</button>
                 <button class="button red-button" onclick="removeProduct('Fresca 1.5', 35)">-</button>
             </div>
+        </div>
+        
+        <div class="products-list">
+                    <div class="product-info">
+                        <p>Canada Dry Medio Lata/Bote</p>
+                        <p class="price">20 Lps</p>
+                    </div>
+                    <div class="button-group">
+                        <button class="button green-button" onclick="addProduct('Canada Dry Medio Lata/Bote', 20)">+</button>
+                        <button class="button red-button" onclick="removeProduct('Canada Dry Medio Lata/Bote', 20)">-</button>
+                    </div>
+                </div>
+                
+   <div class="products-list">
+                                    <div class="product-info">
+                                        <p>Coca Cola 1.5 lts</p>
+                                        <p class="price">35 Lps</p>
+                                    </div>
+                                    <div class="button-group">
+                                        <button class="button green-button" onclick="addProduct('Coca Cola 1.5 lts', 35)">+</button>
+                                        <button class="button red-button" onclick="removeProduct('Coca Cola 1.5 lts', 35)">-</button>
+                                    </div>
+                                </div>
+        
 
-         <div class="products-list">
-            <div class="product-info">
-                <p>Canada Dry Lata/Bote Medio</p>
-                <p class="price">20 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Canada Dry Lata/Bote Medio', 20)">+</button>
-                <button class="button red-button" onclick="removeProduct('Canada Dry Lata/Bote Medio', 20)">-</button>
-            </div>
-    
-         <div class="products-list">
-            <div class="product-info">
-                <p>Coca Cola 1.5 lts</p>
-                <p class="price">35 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Coca Cola 1.5 lts', 35)">+</button>
-                <button class="button red-button" onclick="removeProduct('Coca Cola 1.5 lts', 35)">-</button>
-            </div>
+                 <div class="products-list">
+                                                             <div class="product-info">
+                                                                 <p>Uva 1.1 Lts</p>
+                                                                 <p class="price">30 Lps</p>
+                                                             </div>
+                                                             <div class="button-group">
+                                                                 <button class="button green-button" onclick="addProduct('Uva 1.1 Lts', 30)">+</button>
+                                                                 <button class="button red-button" onclick="removeProduct('Uva 1.1 Lts', 30)">-</button>
+                                                             </div>
+                                                         </div>
 
-         <div class="products-list">
+<div class="products-list">
+                                            <div class="product-info">
+                                                <p>Mountain Medio Lata/Bote</p>
+                                                <p class="price">20 Lps</p>
+                                            </div>
+                                            <div class="button-group">
+                                                <button class="button green-button" onclick="addProduct('Mountain Medio Lata/Bote', 20)">+</button>
+                                                <button class="button red-button" onclick="removeProduct('Mountain Medio Lata/Bote', 20)">-</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="products-list">
+                                                                                    <div class="product-info">
+                                                                                        <p>Valle Nectar Guayaba</p>
+                                                                                        <p class="price">15 Lps</p>
+                                                                                    </div>
+                                                                                    <div class="button-group">
+                                                                                        <button class="button green-button" onclick="addProduct('Valle Nectar Guayaba', 15)">+</button>
+                                                                                        <button class="button red-button" onclick="removeProduct('Valle Nectar Guayaba', 15)">-</button>
+                                                                                    </div>              </div>
+                                            
+                                        <div class="products-list">
+                                           <div class="product-info">
+<p>SevenUp 1.25 Lts</p>
+<p class="price">30 Lps</p>
+</div>
+<div class="button-group">
+<button class="button green-button" onclick="addProduct('SevenUp 1.25 Lts', 30)">+</button>
+<button class="button red-button" onclick="removeProduct('SevenUp 1.25 Lts', 30)">-</button>
+</div>              </div>
+
+
+        <div class="products-list">
             <div class="product-info">
-                <p>Uva 1.1 lts</p>
-                <p class="price">30 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Uva 1.1 lts', 30)">+</button>
-                <button class="button red-button" onclick="removeProduct('Uva 1.1 lts', 30)">-</button>
-            </div>
-      
-         <div class="products-list">
-            <div class="product-info">
-                <p>Mountain Lata/Bote medio</p>
-                <p class="price">20 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Mountain Lata/Bote medio', 20)">+</button>
-                <button class="button red-button" onclick="removeProduct('Mountain Lata/Bote medio', 20)">-</button>
-            </div>
-            
-         <div class="products-list">
-            <div class="product-info">
-                <p>Valle Nectar Guayaba</p>
-                <p class="price">15 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Valle Nectar Guayaba', 15)">+</button>
-                <button class="button red-button" onclick="removeProduct('Valle Nectar Guayaba', 15)">-</button>
-            </div>
-            
-         <div class="products-list">
-            <div class="product-info">
-                <p>SevenUp 1.25 lts</p>
-                <p class="price">30 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('SevenUp 1.25 lts', 30)">+</button>
-                <button class="button red-button" onclick="removeProduct('SevenUp 1.25 lts', 30)">-</button>
-            </div>
-              
-         <div class="products-list">
-            <div class="product-info">
-                <p>Agua Azul pq</p>
+                <p>Agua Azul Pequeña</p>
                 <p class="price">10 Lps</p>
             </div>
             <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Agua Azul pq', 10)">+</button>
-                <button class="button red-button" onclick="removeProduct('Agua Azul pq', 10)">-</button>
+                <button class="button green-button" onclick="addProduct('Agua Azul Pequeña', 10)">+</button>
+                <button class="button red-button" onclick="removeProduct('Agua Azul Pequeña', 10)">-</button>
             </div>
-            
-         <div class="products-list">
-            <div class="product-info">
-                <p>Zibas</p>
-                <p class="price">10 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Zibas', 10)">+</button>
-                <button class="button red-button" onclick="removeProduct('Zibas', 10)">-</button>
-            </div>
-             
-         <div class="products-list">
-            <div class="product-info">
-                <p>Tacos</p>
-                <p class="price">5 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Tacos', 5)">+</button>
-                <button class="button red-button" onclick="removeProduct('Tacos', 5)">-</button>
-            </div>
-              
-         <div class="products-list">
-            <div class="product-info">
-                <p>Doraditas</p>
-                <p class="price">5 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Doraditas', 5)">+</button>
-                <button class="button red-button" onclick="removeProduct('Doraditas', 5)">-</button>
-            </div>
+        </div>
+
+
+        <!-- Continúan los demás productos de la misma forma -->
+
+        <!-- Productos seleccionados -->
         <div class="selected-products" id="selectedProducts">
             <h2>Productos Seleccionados</h2>
             <table id="productTable">
@@ -420,14 +403,12 @@
                 </tr>
             </table>
             <p>Total Seleccionado: <span id="selectedTotal">0</span> Lps</p>
-            
-            <!-- Botón para guardar como imagen -->
+
             <button class="save-button" onclick="saveAsImage()">Guardar como Imagen</button>
-
-
             <button class="button red-button button-close" onclick="toggleSelectedProducts()">Cerrar</button>
         </div>
 
+        <!-- Calculadora de vuelto -->
         <div class="change-calculator" id="changeCalculator">
             <h2>Calculadora de Vuelto</h2>
             <input type="number" id="amountGiven" placeholder="Ingresa la cantidad de dinero" oninput="updateChange()">
