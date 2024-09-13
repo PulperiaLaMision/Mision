@@ -111,15 +111,39 @@
             margin: 0 5px;
         }
 
-        .selected-products, .change-calculator {
+    .selected-products {
             display: none;
             border: 1px solid #ddd;
             padding: 20px;
             margin-top: 30px;
             background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para las secciones de productos seleccionados y calculadora */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            position: fixed; /* Esto lo hace flotante */
+            top: 50%; /* Ajusta la posición */
+            left: 50%; /* Centra horizontalmente */
+            transform: translate(-50%, -50%); /* Centra completamente */
+            z-index: 9999; /* Para asegurarse de que quede al frente */
+            width: 90%; /* Ancho del cuadro flotante */
+            max-width: 600px; /* Limitar el ancho máximo */
+        }
+        
+        .change-calculator {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: fixed; /* Esto lo hace flotante */
+            top: 50%; /* Ajusta la posición */
+            left: 50%; /* Centra horizontalmente */
+            transform: translate(-50%, -50%); /* Centra completamente */
+            z-index: 9999; /* Para asegurarse de que quede al frente */
+            width: 90%; /* Ancho del cuadro flotante */
+            max-width: 600px; /* Limitar el ancho máximo */
         }
 
         .selected-products table {
