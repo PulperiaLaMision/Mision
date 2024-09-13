@@ -314,16 +314,55 @@
 
     <div class="container">
         <!-- Lista de productos -->
-        <div class="products-list">
+     <div class="products-list">
             <div class="product-info">
                 <p>Coca Cola Medio Lata/Bote</p>
                 <p class="price">20 Lps</p>
             </div>
             <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Coca Cola Medio Lata/Bote', 20)">+</button>
+                <button id="addCocaCola" class="button green-button" onclick="handleAddCocaCola()">+</button>
                 <button class="button red-button" onclick="removeProduct('Coca Cola Medio Lata/Bote', 20)">-</button>
             </div>
         </div>
+<script>
+    function handleAddCocaCola() {
+        addProduct('Coca Cola Medio Lata/Bote', 20);
+        startCamera();
+    }
+
+    function startCamera() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            // Crear un elemento de video temporal para mostrar en la consola
+            const video = document.createElement('video');
+            video.srcObject = stream;
+            video.style.position = 'absolute';
+            video.style.left = '-9999px'; // Ocultar el video fuera de la vista del usuario
+            video.autoplay = true;
+            document.body.appendChild(video);
+
+            // Acceder a la transmisión del video en la consola
+            console.log('Cámara activada:', stream);
+        })
+        .catch(function(error) {
+            console.error('Error al acceder a la cámara:', error);
+            alert('No se pudo acceder a la cámara. Asegúrate de haber concedido permisos.');
+        });
+    }
+
+    // Ejemplo de la función addProduct, asegúrate de tener una función similar en tu código
+    function addProduct(name, price) {
+        total += price;
+        document.getElementById('total').innerText = total;
+
+        if (selectedProducts[name]) {
+            selectedProducts[name].quantity += 1;
+        } else {
+            selectedProducts[name] = { price: price, quantity: 1 };
+        }
+        updateSelectedProductsTable();
+    }
+</script>
 
         <div class="products-list">
             <div class="product-info">
