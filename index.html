@@ -3,103 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Congreso Inagotable</title>
+    <title>Pulpería La Misión</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #001f3f; /* Azul oscuro */
             font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding-top: 130px; /* Espacio para el cuadro fijo */
+        }
+
+        .fixed-top {
+            position: fixed;
+            top: 0;
+            width: 90%;
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            border-bottom: 2px solid #0056b3; /* Borde en la parte inferior */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mejor visibilidad */
+        }
+
+        .fixed-top h1 {
+            font-size: 30px; /* Título más grande */
+            margin: 0;
+        }
+
+        .fixed-top p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .fixed-top button {
+            padding: 7px 16px;
+            margin: 10px 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .green-button {
+            background-color: #28a745;
             color: white;
         }
+
+        .orange-button {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .red-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .green-button:hover, .orange-button:hover, .red-button:hover {
+            opacity: 0.9;
+        }
+
         .container {
-            text-align: center;
-            background-color: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            padding: 10px;
+            max-width: 800px;
+            margin: 30px auto 0; /* Ajustado para bajar los productos */
+        }
+
+        .products-list {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f1f1f1;
+            padding: 7px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para las tarjetas de productos */
+        }
+
+        .products-list .product-info {
+            display: flex;
+            justify-content: space-between;
             width: 100%;
         }
-        h1 {
-            font-family: 'Lucida Handwriting', cursive;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #001f3f; /* Azul oscuro */
+
+        .products-list p {
+            margin: 0;
         }
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
+
+        .products-list .price {
+            text-align: right;
+            flex: 1;
         }
-        .verse {
-            font-size: 1.5rem;
-            color: #555;
-            margin-bottom: 20px;
+
+        .button-group {
+            display: flex;
+            align-items: center;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
+
+        .button-group button {
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            font-size: 18px;
             border-radius: 5px;
-            cursor: pointer;
+            margin: 0 5px;
         }
-        button:hover {
-            background-color: #45a049;
+
+    .selected-products {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: fixed; /* Esto lo hace flotante */
+            top: 50%; /* Ajusta la posición */
+            left: 50%; /* Centra horizontalmente */
+            transform: translate(-50%, -50%); /* Centra completamente */
+            z-index: 9999; /* Para asegurarse de que quede al frente */
+            width: 90%; /* Ancho del cuadro flotante */
+            max-width: 600px; /* Limitar el ancho máximo */
+        }
+        
+        .change-calculator {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: fixed; /* Esto lo hace flotante */
+            top: 50%; /* Ajusta la posición */
+            left: 50%; /* Centra horizontalmente */
+            transform: translate(-50%, -50%); /* Centra completamente */
+            z-index: 9999; /* Para asegurarse de que quede al frente */
+            width: 90%; /* Ancho del cuadro flotante */
+            max-width: 600px; /* Limitar el ancho máximo */
+        }
+
+        .selected-products table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .selected-products table th, .selected-products table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: calc(100% - 22px); /* Ajustado para el padding */
+            font-size: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos del botón "Guardar como Imagen" */
+        .save-button {
+            background-color: #333; /* Color gris oscuro */
+            color: white; /* Letras en blanco */
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%; /* Ocupará todo el ancho del contenedor */
+            margin-bottom: 10px; /* Espacio debajo del botón */
+            transition: background-color 0.3s ease; /* Efecto suave al hacer hover */
+        }
+
+        .save-button:hover {
+            background-color: #555; /* Color más claro al hacer hover */
+        }
+
+        .button-close {
+            padding: 10px 25px;
+            font-size: 18px;
+        }
+
+        /* Prevenir el zoom en el navegador al hacer clic */
+        body, html {
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
     </style>
-</head>
-<body>
-    <div class="container" id="verseContainer">
-        <h1>Congreso Inagotable</h1>
-        <h2>Esto te dice el Señor</h2>
-        <div class="verse" id="verse">Cargando versículo...</div>
-        <button id="saveVerse">Guardar Versículo</button>
-    </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        // Array de versículos con promesas bíblicas
-        const verses = [
-            "Isaías 40:31 - Pero los que confían en el Señor renovarán sus fuerzas; volarán como las águilas: correrán y no se fatigarán, caminarán y no se cansarán.",
-            "Filipenses 4:13 - Todo lo puedo en Cristo que me fortalece.",
-            "2 Corintios 12:9 - Y me ha dicho: Bástate mi gracia, porque mi poder se perfecciona en la debilidad.",
-            "Isaías 58:11 - El Señor te guiará siempre; te saciará en tierra reseca y fortalecerá tus huesos. Serás como un jardín bien regado, como un manantial cuyas aguas nunca faltan.",
-            "Salmos 73:26 - Mi carne y mi corazón desfallecen; mas la roca de mi corazón y mi porción es Dios para siempre.",
-            "Mateo 11:28 - Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.",
-            "Deuteronomio 31:6 - Sed fuertes y valientes, no temáis ni os aterrorizéis ante ellos, porque el Señor tu Dios va contigo; nunca te dejará ni te desamparará.",
-            "Josué 1:9 - Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas."
-        ];
-
-        // Función para mostrar un versículo aleatorio
-        function getRandomVerse() {
-            const randomIndex = Math.floor(Math.random() * verses.length);
-            document.getElementById('verse').textContent = verses[randomIndex];
-        }
-
-        // Función para capturar la imagen del versículo
-        function captureVerse() {
-            const verseContainer = document.getElementById('verseContainer');
-            
-            // Usar html2canvas para tomar una captura de pantalla del contenedor del versículo
-            html2canvas(verseContainer).then(canvas => {
-                // Crear un enlace temporal para descargar la imagen
+        function saveAsImage() {
+            const selectedProductsDiv = document.getElementById('selectedProducts');
+            html2canvas(selectedProductsDiv).then(canvas => {
                 const link = document.createElement('a');
+                link.download = 'productos-seleccionados.png';
                 link.href = canvas.toDataURL('image/png');
-                link.download = 'versiculo_inagotable.png';
                 link.click();
+            }).catch(error => {
+                console.error('Error al guardar la imagen:', error);
+                alert('Error al guardar la imagen. Por favor, inténtelo de nuevo.');
             });
         }
 
-        // Mostrar un versículo al cargar la página
-        window.onload = getRandomVerse;
+        let total = 0;
+        let selectedProducts = {};
 
-        // Añadir evento para capturar y guardar el versículo como imagen
-        document.getElementById('saveVerse').addEventListener('click', captureVerse);
+        function addProduct(name, price) {
+            total += price;
+            document.getElementById('total').innerText = total;
+
+            if (selectedProducts[name]) {
+                selectedProducts[name].quantity += 1;
+            } else {
+                selectedProducts[name] = { price: price, quantity: 1 };
+            }
+            updateSelectedProductsTable();
+        }
+
+        function removeProduct(name, price) {
+            if (selectedProducts[name] && selectedProducts[name].quantity > 0) {
+                total -= price;
+                document.getElementById('total').innerText = total;
+                selectedProducts[name].quantity -= 1;
+
+                if (selectedProducts[name].quantity === 0) {
+                    delete selectedProducts[name];
+                }
+                updateSelectedProductsTable();
+            }
+        }
+
+        function toggleSelectedProducts() {
+            const selectedProductsDiv = document.getElementById('selectedProducts');
+            const isVisible = selectedProductsDiv.style.display === 'block';
+            if (isVisible) {
+                selectedProductsDiv.style.display = 'none';
+            } else {
+                updateSelectedProductsTable();
+                selectedProductsDiv.style.display = 'block';
+            }
+        }
+
+        function toggleChangeCalculator() {
+            const changeCalculatorDiv = document.getElementById('changeCalculator');
+            const isVisible = changeCalculatorDiv.style.display === 'block';
+            if (isVisible) {
+                changeCalculatorDiv.style.display = 'none';
+            } else {
+                changeCalculatorDiv.style.display = 'block';
+            }
+        }
+
+        function updateSelectedProductsTable() {
+            const table = document.getElementById('productTable');
+            table.innerHTML = `
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            `;
+
+            let selectedTotal = 0;
+
+            for (let product in selectedProducts) {
+                const row = table.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+
+                cell1.innerHTML = product;
+                cell2.innerHTML = selectedProducts[product].quantity;
+                cell3.innerHTML = selectedProducts[product].price * selectedProducts[product].quantity;
+
+                selectedTotal += selectedProducts[product].price * selectedProducts[product].quantity;
+            }
+
+            document.getElementById('selectedTotal').innerText = selectedTotal;
+        }
+
+        function updateChange() {
+            const amountGiven = parseFloat(document.getElementById('amountGiven').value) || 0;
+            const change = amountGiven - total;
+            document.getElementById('change').innerText = change >= 0 ? change : 0;
+        }
     </script>
+</head>
+<body>
+    <div class="fixed-top">
+        <h1>Pulpería La Misión</h1>
+        <p>Total: <span id="total">0.00</span> Lps</p>
+        <button class="button green-button" onclick="toggleSelectedProducts()">Productos Seleccionados</button>
+        <button class="button orange-button" onclick="toggleChangeCalculator()">Vuelto</button>
+    </div>
+
+    <div class="container">
+        <!-- Lista de productos -->
+        <div class="products-list">
+            <div class="product-info">
+                <p>Coca Cola Medio Lata/Bote</p>
+                <p class="price">20 Lps</p>
+            </div>
+            <div class="button-group">
+                <button class="button green-button" onclick="addProduct('Coca Cola Medio Lata/Bote', 20)">+</button>
+                <button class="button red-button" onclick="removeProduct('Coca Cola Medio Lata/Bote', 20)">-</button>
+            </div>
+        </div>
+
+        <div class="products-list">
+            <div class="product-info">
+                <p>Fresca 1.5</p>
+                <p class="price">35 Lps</p>
+            </div>
+            <div class="button-group">
+                <button class="button green-button" onclick="addProduct('Fresca 1.5', 35)">+</button>
+                <button class="button red-button" onclick="removeProduct('Fresca 1.5', 35)">-</button>
+            </div>
+        </div>
+        
+        <div class="products-list">
+                    <div class="product-info">
+                        <p>Canada Dry Medio Lata/Bote</p>
+                        <p class="price">20 Lps</p>
+                    </div>
+                    <div class="button-group">
+                        <button class="button green-button" onclick="addProduct('Canada Dry Medio Lata/Bote', 20)">+</button>
+                        <button class="button red-button" onclick="removeProduct('Canada Dry Medio Lata/Bote', 20)">-</button>
+                    </div>
+                </div>
+                
+   <div class="products-list">
+                                    <div class="product-info">
+                                        <p>Coca Cola 1.5 lts</p>
+                                        <p class="price">35 Lps</p>
+                                    </div>
+                                    <div class="button-group">
+                                        <button class="button green-button" onclick="addProduct('Coca Cola 1.5 lts', 35)">+</button>
+                                        <button class="button red-button" onclick="removeProduct('Coca Cola 1.5 lts', 35)">-</button>
+                                    </div>
+                                </div>
+        
+
+                 <div class="products-list">
+                                                             <div class="product-info">
+                                                                 <p>Uva 1.1 Lts</p>
+                                                                 <p class="price">30 Lps</p>
+                                                             </div>
+                                                             <div class="button-group">
+                                                                 <button class="button green-button" onclick="addProduct('Uva 1.1 Lts', 30)">+</button>
+                                                                 <button class="button red-button" onclick="removeProduct('Uva 1.1 Lts', 30)">-</button>
+                                                             </div>
+                                                         </div>
+
+<div class="products-list">
+                                            <div class="product-info">
+                                                <p>Mountain Medio Lata/Bote</p>
+                                                <p class="price">20 Lps</p>
+                                            </div>
+                                            <div class="button-group">
+                                                <button class="button green-button" onclick="addProduct('Mountain Medio Lata/Bote', 20)">+</button>
+                                                <button class="button red-button" onclick="removeProduct('Mountain Medio Lata/Bote', 20)">-</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="products-list">
+                                                                                    <div class="product-info">
+                                                                                        <p>Valle Nectar Guayaba</p>
+                                                                                        <p class="price">15 Lps</p>
+                                                                                    </div>
+                                                                                    <div class="button-group">
+                                                                                        <button class="button green-button" onclick="addProduct('Valle Nectar Guayaba', 15)">+</button>
+                                                                                        <button class="button red-button" onclick="removeProduct('Valle Nectar Guayaba', 15)">-</button>
+                                                                                    </div>              </div>
+                                            
+                                        <div class="products-list">
+                                           <div class="product-info">
+<p>SevenUp 1.25 Lts</p>
+<p class="price">30 Lps</p>
+</div>
+<div class="button-group">
+<button class="button green-button" onclick="addProduct('SevenUp 1.25 Lts', 30)">+</button>
+<button class="button red-button" onclick="removeProduct('SevenUp 1.25 Lts', 30)">-</button>
+</div>              </div>
+
+
+        <div class="products-list">
+            <div class="product-info">
+                <p>Agua Azul Pequeña</p>
+                <p class="price">10 Lps</p>
+            </div>
+            <div class="button-group">
+                <button class="button green-button" onclick="addProduct('Agua Azul Pequeña', 10)">+</button>
+                <button class="button red-button" onclick="removeProduct('Agua Azul Pequeña', 10)">-</button>
+            </div>
+        </div>
+
+
+        <!-- Continúan los demás productos de la misma forma -->
+
+        <!-- Productos seleccionados -->
+        <div class="selected-products" id="selectedProducts">
+            <h2>Productos Seleccionados</h2>
+            <table id="productTable">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            </table>
+            <p>Total Seleccionado: <span id="selectedTotal">0</span> Lps</p>
+
+            <button class="save-button" onclick="saveAsImage()">Guardar como Imagen</button>
+            <button class="button red-button button-close" onclick="toggleSelectedProducts()">Cerrar</button>
+        </div>
+
+        <!-- Calculadora de vuelto -->
+        <div class="change-calculator" id="changeCalculator">
+            <h2>Calculadora de Vuelto</h2>
+            <input type="number" id="amountGiven" placeholder="Ingresa la cantidad de dinero" oninput="updateChange()">
+            <p>Vuelto: <span id="change">0</span> Lps</p>
+            <button class="button red-button button-close" onclick="toggleChangeCalculator()">Cerrar</button>
+        </div>
+    </div>
 </body>
 </html>
