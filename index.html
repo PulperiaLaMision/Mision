@@ -5,15 +5,223 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pulpería La Misión</title>
     <style>
-        /* ... [estilos existentes] ... */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding-top: 130px; /* Espacio para el cuadro fijo */
+        }
+
+        .fixed-top {
+            position: fixed;
+            top: 0;
+            width: 90%;
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            border-bottom: 2px solid #0056b3; /* Borde en la parte inferior */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mejor visibilidad */
+        }
+
+        .fixed-top h1 {
+            font-size: 30px; /* Título más grande */
+            margin: 0;
+        }
+
+        .fixed-top p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .fixed-top button {
+            padding: 7px 16px;
+            margin: 10px 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .green-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .orange-button {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .red-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .green-button:hover, .orange-button:hover, .red-button:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            padding: 10px;
+            max-width: 800px;
+            margin: 30px auto 0; /* Ajustado para bajar los productos */
+        }
+
+        .products-list {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f1f1f1;
+            padding: 7px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para las tarjetas de productos */
+        }
+
+        .products-list .product-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .products-list p {
+            margin: 0;
+        }
+
+        .products-list .price {
+            text-align: right;
+            flex: 1;
+        }
+
+        .button-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .button-group button {
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            font-size: 18px;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .selected-products {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: fixed; /* Esto lo hace flotante */
+            top: 50%; /* Ajusta la posición */
+            left: 50%; /* Centra horizontalmente */
+            transform: translate(-50%, -50%); /* Centra completamente */
+            z-index: 9999; /* Para asegurarse de que quede al frente */
+            width: 90%; /* Ancho del cuadro flotante */
+            max-width: 600px; /* Limitar el ancho máximo */
+        }
+        
+        .change-calculator {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: fixed; /* Esto lo hace flotante */
+            top: 50%; /* Ajusta la posición */
+            left: 50%; /* Centra horizontalmente */
+            transform: translate(-50%, -50%); /* Centra completamente */
+            z-index: 9999; /* Para asegurarse de que quede al frente */
+            width: 90%; /* Ancho del cuadro flotante */
+            max-width: 600px; /* Limitar el ancho máximo */
+        }
+
+        .selected-products table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .selected-products table th, .selected-products table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: calc(100% - 22px); /* Ajustado para el padding */
+            font-size: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos del botón "Guardar como Imagen" */
+        .save-button {
+            background-color: #333; /* Color gris oscuro */
+            color: white; /* Letras en blanco */
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%; /* Ocupará todo el ancho del contenedor */
+            margin-bottom: 10px; /* Espacio debajo del botón */
+            transition: background-color 0.3s ease; /* Efecto suave al hacer hover */
+        }
+
+        .save-button:hover {
+            background-color: #555; /* Color más claro al hacer hover */
+        }
+
+        .button-close {
+            padding: 10px 25px;
+            font-size: 18px;
+        }
+
+        /* Prevenir el zoom en el navegador al hacer clic */
+        body, html {
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        // Variables globales
         let total = 0;
         let selectedProducts = {};
 
-        // Funciones existentes
+        function saveAsImage() {
+            const selectedProductsDiv = document.getElementById('selectedProducts');
+            html2canvas(selectedProductsDiv).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'productos-seleccionados.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(error => {
+                console.error('Error al guardar la imagen:', error);
+                alert('Error al guardar la imagen. Por favor, inténtelo de nuevo.');
+            });
+        }
 
         function addProduct(name, price) {
             total += price;
@@ -40,6 +248,27 @@
             }
         }
 
+        function toggleSelectedProducts() {
+            const selectedProductsDiv = document.getElementById('selectedProducts');
+            const isVisible = selectedProductsDiv.style.display === 'block';
+            if (isVisible) {
+                selectedProductsDiv.style.display = 'none';
+            } else {
+                updateSelectedProductsTable();
+                selectedProductsDiv.style.display = 'block';
+            }
+        }
+
+        function toggleChangeCalculator() {
+            const changeCalculatorDiv = document.getElementById('changeCalculator');
+            const isVisible = changeCalculatorDiv.style.display === 'block';
+            if (isVisible) {
+                changeCalculatorDiv.style.display = 'none';
+            } else {
+                changeCalculatorDiv.style.display = 'block';
+            }
+        }
+
         function updateSelectedProductsTable() {
             const table = document.getElementById('productTable');
             table.innerHTML = `
@@ -50,204 +279,109 @@
                 </tr>
             `;
 
-            let selectedTotal = 0;
-
-            for (let product in selectedProducts) {
-                const row = table.insertRow();
-                const cell1 = row.insertCell(0);
-                const cell2 = row.insertCell(1);
-                const cell3 = row.insertCell(2);
-
-                cell1.innerHTML = product;
-                cell2.innerHTML = selectedProducts[product].quantity;
-                cell3.innerHTML = selectedProducts[product].price * selectedProducts[product].quantity;
-
-                selectedTotal += selectedProducts[product].price * selectedProducts[product].quantity;
+            for (const product in selectedProducts) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product}</td>
+                    <td>${selectedProducts[product].quantity}</td>
+                    <td>${(selectedProducts[product].price * selectedProducts[product].quantity).toFixed(2)} Lps</td>
+                `;
+                table.appendChild(row);
             }
 
-            document.getElementById('selectedTotal').innerText = selectedTotal;
+            const totalElement = document.getElementById('selectedTotal');
+            totalElement.innerText = total.toFixed(2);
         }
 
         function clearAllProducts() {
-            total = 0;
-            selectedProducts = {};
-            document.getElementById('total').innerText = total;
-            updateSelectedProductsTable();
-            toggleSelectedProducts(); // Cierra el cuadro de productos seleccionados
-            toggleChangeCalculator(); // Cierra el cuadro de calculadora de vuelto
+            selectedProducts = {}; // Limpiar los productos seleccionados
+            total = 0; // Reiniciar el total
+            document.getElementById('total').innerText = total; // Actualizar el total en la interfaz
+            updateSelectedProductsTable(); // Actualizar la tabla de productos seleccionados
         }
     </script>
 </head>
 <body>
-    <div class="fixed-top">
-        <h1>Pulpería La Misión</h1>
-        <p>Total: <span id="total">0.00</span> Lps</p>
-        <button class="button green-button" onclick="toggleSelectedProducts()">Productos Seleccionados</button>
-        <button class="button orange-button" onclick="toggleChangeCalculator()">Vuelto</button>
-    </div>
 
-    <div class="container">
-        <!-- Lista de productos -->
-        <div class="products-list">
-            <div class="product-info">
-                <p>Coca Cola Medio Lata/Bote</p>
-                <p class="price">20 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Coca Cola Medio Lata/Bote', 20)">+</button>
-                <button class="button red-button" onclick="removeProduct('Coca Cola Medio Lata/Bote', 20)">-</button>
-            </div>
-        </div>
+<div class="fixed-top">
+    <h1>Pulpería La Misión</h1>
+    <p>Total: <span id="total">0</span> Lps</p>
+    <button class="green-button" onclick="toggleSelectedProducts()">Ver Productos Seleccionados</button>
+    <button class="orange-button" onclick="toggleChangeCalculator()">Calculadora de Cambio</button>
+</div>
 
-        <div class="products-list">
-            <div class="product-info">
-                <p>Fresca 1.5</p>
-                <p class="price">35 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Fresca 1.5', 35)">+</button>
-                <button class="button red-button" onclick="removeProduct('Fresca 1.5', 35)">-</button>
-            </div>
+<div class="container">
+    <h2>Lista de Productos</h2>
+    <div class="products-list">
+        <div class="product-info">
+            <p>Producto 1</p>
+            <p class="price">50 Lps</p>
         </div>
-        
-        <div class="products-list">
-            <div class="product-info">
-                <p>Canada Dry Medio Lata/Bote</p>
-                <p class="price">20 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Canada Dry Medio Lata/Bote', 20)">+</button>
-                <button class="button red-button" onclick="removeProduct('Canada Dry Medio Lata/Bote', 20)">-</button>
-            </div>
-        </div>
-        
-        <div class="products-list">
-            <div class="product-info">
-                <p>Coca Cola 1.5 lts</p>
-                <p class="price">35 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Coca Cola 1.5 lts', 35)">+</button>
-                <button class="button red-button" onclick="removeProduct('Coca Cola 1.5 lts', 35)">-</button>
-            </div>
-        </div>
-        
-        <div class="products-list">
-            <div class="product-info">
-                <p>Uva 1.1 Lts</p>
-                <p class="price">30 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Uva 1.1 Lts', 30)">+</button>
-                <button class="button red-button" onclick="removeProduct('Uva 1.1 Lts', 30)">-</button>
-            </div>
-        </div>
-
-        <div class="products-list">
-            <div class="product-info">
-                <p>Mountain Medio Lata/Bote</p>
-                <p class="price">20 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Mountain Medio Lata/Bote', 20)">+</button>
-                <button class="button red-button" onclick="removeProduct('Mountain Medio Lata/Bote', 20)">-</button>
-            </div>
-        </div>
-
-        <div class="products-list">
-            <div class="product-info">
-                <p>Valle Nectar Guayaba</p>
-                <p class="price">15 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Valle Nectar Guayaba', 15)">+</button>
-                <button class="button red-button" onclick="removeProduct('Valle Nectar Guayaba', 15)">-</button>
-            </div>
-        </div>
-        
-        <div class="products-list">
-            <div class="product-info">
-                <p>SevenUp 1.25 Lts</p>
-                <p class="price">30 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('SevenUp 1.25 Lts', 30)">+</button>
-                <button class="button red-button" onclick="removeProduct('SevenUp 1.25 Lts', 30)">-</button>
-            </div>
-        </div>
-
-        <div class="products-list">
-            <div class="product-info">
-                <p>Agua Azul Pequeña</p>
-                <p class="price">10 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Agua Azul Pequeña', 10)">+</button>
-                <button class="button red-button" onclick="removeProduct('Agua Azul Pequeña', 10)">-</button>
-            </div>
-        </div>
-
-        <div class="products-list">
-            <div class="product-info">
-                <p>Zibas</p>
-                <p class="price">10 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Zibas', 10)">+</button>
-                <button class="button red-button" onclick="removeProduct('Zibas', 10)">-</button>
-            </div>
-        </div>
-        
-        <div class="products-list">
-            <div class="product-info">
-                <p>Elolitos Verdes</p>
-                <p class="price">5 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Elotitos Verdes', 5)">+</button>
-                <button class="button red-button" onclick="removeProduct('Elotitos Verdes', 5)">-</button>
-            </div>
-        </div>
-
-        <!-- Productos seleccionados -->
-        <div class="selected-products" id="selectedProducts">
-            <
-
-h2>Productos Seleccionados</h2>
-            <table id="productTable"></table>
-            <p>Total Seleccionado: <span id="selectedTotal">0</span> Lps</p>
-            <button class="button red-button" onclick="clearAllProducts()">Borrar Todo</button>
-        </div>
-
-        <!-- Calculadora de vuelto -->
-        <div class="change-calculator" id="changeCalculator">
-            <h2>Calculadora de Vuelto</h2>
-            <label for="amountPaid">Monto Pagado:</label>
-            <input type="number" id="amountPaid" placeholder="Ingrese monto pagado">
-            <button class="button green-button" onclick="calculateChange()">Calcular Vuelto</button>
-            <p>Vuelto: <span id="changeAmount">0</span> Lps</p>
+        <div class="button-group">
+            <button class="green-button" onclick="addProduct('Producto 1', 50)">+</button>
+            <button class="red-button" onclick="removeProduct('Producto 1', 50)">-</button>
         </div>
     </div>
+    <div class="products-list">
+        <div class="product-info">
+            <p>Producto 2</p>
+            <p class="price">30 Lps</p>
+        </div>
+        <div class="button-group">
+            <button class="green-button" onclick="addProduct('Producto 2', 30)">+</button>
+            <button class="red-button" onclick="removeProduct('Producto 2', 30)">-</button>
+        </div>
+    </div>
+    <div class="products-list">
+        <div class="product-info">
+            <p>Producto 3</p>
+            <p class="price">20 Lps</p>
+        </div>
+        <div class="button-group">
+            <button class="green-button" onclick="addProduct('Producto 3', 20)">+</button>
+            <button class="red-button" onclick="removeProduct('Producto 3', 20)">-</button>
+        </div>
+    </div>
+    <!-- Agrega más productos aquí si es necesario -->
+</div>
 
-    <script>
-        function toggleSelectedProducts() {
-            const selectedProductsDiv = document.getElementById('selectedProducts');
-            selectedProductsDiv.style.display = selectedProductsDiv.style.display === 'none' ? 'block' : 'none';
+<!-- Productos seleccionados -->
+<div class="selected-products" id="selectedProducts">
+    <h2>Productos Seleccionados</h2>
+    <table id="productTable">
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+        </tr>
+    </table>
+    <p>Total Seleccionado: <span id="selectedTotal">0</span> Lps</p>
+
+    <button class="save-button" onclick="saveAsImage()">Guardar como Imagen</button>
+    <button class="button red-button button-close" onclick="toggleSelectedProducts()">Cerrar</button>
+    <button class="button red-button" onclick="clearAllProducts()">Borrar Todo</button> <!-- Botón Borrar Todo -->
+</div>
+
+<!-- Calculadora de cambio -->
+<div class="change-calculator" id="changeCalculator">
+    <h2>Calculadora de Cambio</h2>
+    <input type="number" id="amountGiven" placeholder="Monto Entregado">
+    <button class="save-button" onclick="calculateChange()">Calcular Cambio</button>
+    <p id="changeOutput"></p>
+    <button class="button red-button button-close" onclick="toggleChangeCalculator()">Cerrar</button>
+</div>
+
+<script>
+    function calculateChange() {
+        const amountGiven = parseFloat(document.getElementById('amountGiven').value);
+        if (isNaN(amountGiven) || amountGiven < total) {
+            alert('Por favor, ingrese un monto válido mayor o igual al total.');
+            return;
         }
+        const change = amountGiven - total;
+        document.getElementById('changeOutput').innerText = `Cambio: ${change.toFixed(2)} Lps`;
+    }
+</script>
 
-        function toggleChangeCalculator() {
-            const changeCalculatorDiv = document.getElementById('changeCalculator');
-            changeCalculatorDiv.style.display = changeCalculatorDiv.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function calculateChange() {
-            const amountPaid = parseFloat(document.getElementById('amountPaid').value);
-            const change = amountPaid - total;
-            document.getElementById('changeAmount').innerText = change >= 0 ? change.toFixed(2) : 'Monto insuficiente';
-        }
-
-        // Inicializar el total y los productos seleccionados
-        updateSelectedProductsTable();
-    </script>
 </body>
 </html>
