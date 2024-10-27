@@ -1,18 +1,17 @@
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pulpería La Misión</title>
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             margin: 0;
-            padding-top: 130px; /* Espacio para el cuadro fijo */
+            padding-top: 170px; /* Espacio para el cuadro fijo */
         }
 
         .fixed-top {
@@ -24,12 +23,12 @@
             padding: 20px;
             text-align: center;
             z-index: 1000;
-            border-bottom: 2px solid #0056b3; /* Borde en la parte inferior */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mejor visibilidad */
+            border-bottom: 2px solid #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .fixed-top h1 {
-            font-size: 30px; /* Título más grande */
+            font-size: 30px;
             margin: 0;
         }
 
@@ -70,7 +69,7 @@
         .container {
             padding: 10px;
             max-width: 800px;
-            margin: 30px auto 0; /* Ajustado para bajar los productos */
+            margin: 30px auto 0;
         }
 
         .products-list {
@@ -82,7 +81,7 @@
             margin: 20px 0;
             border-radius: 10px;
             font-size: 16px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para las tarjetas de productos */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .products-list .product-info {
@@ -114,7 +113,7 @@
             margin: 0 5px;
         }
 
-    .selected-products {
+        .selected-products {
             display: none;
             border: 1px solid #ddd;
             padding: 20px;
@@ -123,15 +122,15 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            position: fixed; /* Esto lo hace flotante */
-            top: 50%; /* Ajusta la posición */
-            left: 50%; /* Centra horizontalmente */
-            transform: translate(-50%, -50%); /* Centra completamente */
-            z-index: 9999; /* Para asegurarse de que quede al frente */
-            width: 90%; /* Ancho del cuadro flotante */
-            max-width: 600px; /* Limitar el ancho máximo */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            width: 90%;
+            max-width: 600px;
         }
-        
+
         .change-calculator {
             display: none;
             border: 1px solid #ddd;
@@ -140,13 +139,13 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            position: fixed; /* Esto lo hace flotante */
-            top: 50%; /* Ajusta la posición */
-            left: 50%; /* Centra horizontalmente */
-            transform: translate(-50%, -50%); /* Centra completamente */
-            z-index: 9999; /* Para asegurarse de que quede al frente */
-            width: 90%; /* Ancho del cuadro flotante */
-            max-width: 600px; /* Limitar el ancho máximo */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            width: 90%;
+            max-width: 600px;
         }
 
         .selected-products table {
@@ -168,29 +167,28 @@
 
         input[type="number"] {
             padding: 10px;
-            width: calc(100% - 22px); /* Ajustado para el padding */
+            width: calc(100% - 22px);
             font-size: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
             margin-bottom: 10px;
         }
 
-        /* Estilos del botón "Guardar como Imagen" */
         .save-button {
-            background-color: #333; /* Color gris oscuro */
-            color: white; /* Letras en blanco */
+            background-color: #333;
+            color: white;
             border: none;
             padding: 10px;
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
-            width: 100%; /* Ocupará todo el ancho del contenedor */
-            margin-bottom: 10px; /* Espacio debajo del botón */
-            transition: background-color 0.3s ease; /* Efecto suave al hacer hover */
+            width: 100%;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
         }
 
         .save-button:hover {
-            background-color: #555; /* Color más claro al hacer hover */
+            background-color: #555;
         }
 
         .button-close {
@@ -198,17 +196,46 @@
             font-size: 18px;
         }
 
-        /* Prevenir el zoom en el navegador al hacer clic */
-        body, html {
-            touch-action: manipulation;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+        .search-input {
+            padding: 7px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: calc(100% - 20px);
         }
+        
+/* Estilos para los botones */
+                .add-button {
+                    background-color: #28a745; /* Verde para el botón + */
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    width: 35px;
+                    height: 35px;
+                    font-size: 18px;
+                }
+        
+                .remove-button {
+                    background-color: #dc3545; /* Rojo para el botón - */
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    width: 35px;
+                    height: 35px;
+                    font-size: 18px;
+                }
+        
+                .add-button:hover {
+                    opacity: 0.9;
+                }
+        
+                .remove-button:hover {
+                    opacity: 0.9;
+        
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         function saveAsImage() {
             const selectedProductsDiv = document.getElementById('selectedProducts');
@@ -253,23 +280,12 @@
 
         function toggleSelectedProducts() {
             const selectedProductsDiv = document.getElementById('selectedProducts');
-            const isVisible = selectedProductsDiv.style.display === 'block';
-            if (isVisible) {
-                selectedProductsDiv.style.display = 'none';
-            } else {
-                updateSelectedProductsTable();
-                selectedProductsDiv.style.display = 'block';
-            }
+            selectedProductsDiv.style.display = selectedProductsDiv.style.display === 'block' ? 'none' : 'block';
         }
 
         function toggleChangeCalculator() {
             const changeCalculatorDiv = document.getElementById('changeCalculator');
-            const isVisible = changeCalculatorDiv.style.display === 'block';
-            if (isVisible) {
-                changeCalculatorDiv.style.display = 'none';
-            } else {
-                changeCalculatorDiv.style.display = 'block';
-            }
+            changeCalculatorDiv.style.display = changeCalculatorDiv.style.display === 'block' ? 'none' : 'block';
         }
 
         function updateSelectedProductsTable() {
@@ -305,6 +321,15 @@
             const change = amountGiven - total;
             document.getElementById('change').innerText = change >= 0 ? change : 0;
         }
+
+        function filterProducts() {
+            const input = document.getElementById('productSearch').value.toLowerCase();
+            const productElements = document.getElementsByClassName('products-list');
+            for (let product of productElements) {
+                const productName = product.querySelector('.product-info p').innerText.toLowerCase();
+                product.style.display = productName.includes(input) ? '' : 'none';
+            }
+        }
     </script>
 </head>
 <body>
@@ -313,175 +338,48 @@
         <p>Total: <span id="total">0.00</span> Lps</p>
         <button class="button green-button" onclick="toggleSelectedProducts()">Productos Seleccionados</button>
         <button class="button orange-button" onclick="toggleChangeCalculator()">Vuelto</button>
+        <input type="text" id="productSearch" class="search-input" placeholder="Buscar producto..." oninput="filterProducts()">
     </div>
 
-    <div class="container">
-        <!-- Lista de productos -->
-        <div class="products-list">
-            <div class="product-info">
-                <p>Coca Cola Medio Lata/Bote</p>
-                <p class="price">20 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Coca Cola Medio Lata/Bote', 20)">+</button>
-                <button class="button red-button" onclick="removeProduct('Coca Cola Medio Lata/Bote', 20)">-</button>
-            </div>
-        </div>
 
-        <div class="products-list">
-            <div class="product-info">
-                <p>Fresca 1.5</p>
-                <p class="price">35 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Fresca 1.5', 35)">+</button>
-                <button class="button red-button" onclick="removeProduct('Fresca 1.5', 35)">-</button>
-            </div>
-        </div>
-        
-        <div class="products-list">
-                    <div class="product-info">
-                        <p>Canada Dry Medio Lata/Bote</p>
-                        <p class="price">20 Lps</p>
-                    </div>
-                    <div class="button-group">
-                        <button class="button green-button" onclick="addProduct('Canada Dry Medio Lata/Bote', 20)">+</button>
-                        <button class="button red-button" onclick="removeProduct('Canada Dry Medio Lata/Bote', 20)">-</button>
-                    </div>
+
+<div class="container">
+            <div class="products-list">
+                <div class="product-info">
+                    <p>Producto A</p>
+                    <p class="price">20.00 Lps</p>
                 </div>
-                
-   <div class="products-list">
-                                    <div class="product-info">
-                                        <p>Coca Cola 1.5 lts</p>
-                                        <p class="price">35 Lps</p>
-                                    </div>
-                                    <div class="button-group">
-                                        <button class="button green-button" onclick="addProduct('Coca Cola 1.5 lts', 35)">+</button>
-                                        <button class="button red-button" onclick="removeProduct('Coca Cola 1.5 lts', 35)">-</button>
-                                    </div>
-                                </div>
-        
-
-                 <div class="products-list">
-                                                             <div class="product-info">
-                                                                 <p>Uva 1.1 Lts</p>
-                                                                 <p class="price">30 Lps</p>
-                                                             </div>
-                                                             <div class="button-group">
-                                                                 <button class="button green-button" onclick="addProduct('Uva 1.1 Lts', 30)">+</button>
-                                                                 <button class="button red-button" onclick="removeProduct('Uva 1.1 Lts', 30)">-</button>
-                                                             </div>
-                                                         </div>
-
-<div class="products-list">
-                                            <div class="product-info">
-                                                <p>Mountain Medio Lata/Bote</p>
-                                                <p class="price">20 Lps</p>
-                                            </div>
-                                            <div class="button-group">
-                                                <button class="button green-button" onclick="addProduct('Mountain Medio Lata/Bote', 20)">+</button>
-                                                <button class="button red-button" onclick="removeProduct('Mountain Medio Lata/Bote', 20)">-</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="products-list">
-                                                                                    <div class="product-info">
-                                                                                        <p>Valle Nectar Guayaba</p>
-                                                                                        <p class="price">15 Lps</p>
-                                                                                    </div>
-                                                                                    <div class="button-group">
-                                                                                        <button class="button green-button" onclick="addProduct('Valle Nectar Guayaba', 15)">+</button>
-                                                                                        <button class="button red-button" onclick="removeProduct('Valle Nectar Guayaba', 15)">-</button>
-                                                                                    </div>              </div>
-                                            
-                                        <div class="products-list">
-                                           <div class="product-info">
-<p>SevenUp 1.25 Lts</p>
-<p class="price">30 Lps</p>
-</div>
-<div class="button-group">
-<button class="button green-button" onclick="addProduct('SevenUp 1.25 Lts', 30)">+</button>
-<button class="button red-button" onclick="removeProduct('SevenUp 1.25 Lts', 30)">-</button>
-</div>              </div>
-
-
-        <div class="products-list">
-            <div class="product-info">
-                <p>Agua Azul Pequeña</p>
-                <p class="price">10 Lps</p>
+                <div class="button-group">
+                    <button class="add-button" onclick="addProduct('Producto A', 20)">+</button>
+                    <button class="remove-button" onclick="removeProduct('Producto A', 20)">-</button>
+                </div>
             </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Agua Azul Pequeña', 10)">+</button>
-                <button class="button red-button" onclick="removeProduct('Agua Azul Pequeña', 10)">-</button>
+            <div class="products-list">
+                <div class="product-info">
+                    <p>Producto B</p>
+                    <p class="price">15.00 Lps</p>
+                </div>
+                <div class="button-group">
+                    <button class="add-button" onclick="addProduct('Producto B', 15)">+</button>
+                    <button class="remove-button" onclick="removeProduct('Producto B', 15)">-</button>
+                </div>
             </div>
+            <!-- Agrega más productos aquí, siguiendo el mismo formato -->
         </div>
+        <!-- Agregar más productos aquí -->
+    </div>
 
-<div class="products-list">
-            <div class="product-info">
-                <p>Zibas</p>
-                <p class="price">10 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Zibas', 10)">+</button>
-                <button class="button red-button" onclick="removeProduct('Zibas', 10)">-</button>
-            </div>
-        </div>
-        
-   <div class="products-list">
-            <div class="product-info">
-                <p>Elolitos Verdes</p>
-                <p class="price">5 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Elotitos Verdes', 5)">+</button>
-                <button class="button red-button" onclick="removeProduct('Elotitos Verdes', 5)">-</button>
-            </div>
-        </div>
-         <div class="products-list">
-            <div class="product-info">
-                <p>Anillitos</p>
-                <p class="price">5 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Anillitos', 5)">+</button>
-                <button class="button red-button" onclick="removeProduct('Anillitos', 5)">-</button>
-            </div>
-        </div>
-         <div class="products-list">
-            <div class="product-info">
-                <p>Doritos</p>
-                <p class="price">8 Lps</p>
-            </div>
-            <div class="button-group">
-                <button class="button green-button" onclick="addProduct('Doritos', 8)">+</button>
-                <button class="button red-button" onclick="removeProduct('Doritos', 8)">-</button>
-            </div>
-        </div>
-        <!-- Continúan los demás productos de la misma forma -->
+    <div id="selectedProducts" class="selected-products">
+        <table id="productTable"></table>
+        <p class="total">Total Seleccionado: <span id="selectedTotal">0.00</span> Lps</p>
+        <button class="save-button" onclick="saveAsImage()">Guardar como imagen</button>
+        <button class="red-button button-close" onclick="toggleSelectedProducts()">Cerrar</button>
+    </div>
 
-        <!-- Productos seleccionados -->
-        <div class="selected-products" id="selectedProducts">
-            <h2>Productos Seleccionados</h2>
-            <table id="productTable">
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                </tr>
-            </table>
-            <p>Total Seleccionado: <span id="selectedTotal">0</span> Lps</p>
-
-            <button class="save-button" onclick="saveAsImage()">Guardar como Imagen</button>
-            <button class="button red-button button-close" onclick="toggleSelectedProducts()">Cerrar</button>
-        </div>
-
-        <!-- Calculadora de vuelto -->
-        <div class="change-calculator" id="changeCalculator">
-            <h2>Calculadora de Vuelto</h2>
-            <input type="number" id="amountGiven" placeholder="Ingresa la cantidad de dinero" oninput="updateChange()">
-            <p>Vuelto: <span id="change">0</span> Lps</p>
-            <button class="button red-button button-close" onclick="toggleChangeCalculator()">Cerrar</button>
-        </div>
+    <div id="changeCalculator" class="change-calculator">
+        <input type="number" id="amountGiven" placeholder="Monto recibido" oninput="updateChange()">
+        <p class="total">Vuelto: <span id="change">0.00</span> Lps</p>
+        <button class="red-button button-close" onclick="toggleChangeCalculator()">Cerrar</button>
     </div>
 </body>
 </html>
